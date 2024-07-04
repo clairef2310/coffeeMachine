@@ -1,0 +1,42 @@
+# Dossier node_modules et son contenu
+node_modules/
+
+# Dossier de construction et son contenu
+build/
+
+# Fichiers journaux
+*.log
+
+# Fichiers temporaires
+tmp/
+
+# Fichiers d'environnement spécifiques au développeur
+.env
+
+# Dossiers spécifiques à l'IDE
+.idea/
+.vscode/
+
+# Fichiers de cache
+npm-cache/
+yarn-cache/
+
+# Fichiers de configuration spécifiques à l'utilisateur
+config/user.json
+
+# Fichiers de documentation générée
+docs/
+
+# Dossiers de tests
+test/
+__tests__/
+
+# Fichiers de couverture de code
+coverage/
+
+# Fichiers compilés
+*.tsbuildinfo
+
+# Fichiers de transcompilation
+*.js
+*.map
