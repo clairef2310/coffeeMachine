@@ -71,7 +71,7 @@ describe("MVP", () => {
     ])
     ("Cas plus de 50cts", (pièce: Pièce) => {
         let hardware = new HardwareFake()
-        let machineCafé = new MachineACafé(hardware)
+        let machineCafé = new MachineACafé.SansEau();
 
         // QUAND on insère la pièce
         hardware.SimulerInsertionPièce(pièce)
