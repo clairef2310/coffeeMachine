@@ -27,9 +27,6 @@ config/user.json
 # Fichiers de documentation générée
 docs/
 
-# Dossiers de tests
-test/
-__tests__/
 
 # Fichiers de couverture de code
 coverage/
