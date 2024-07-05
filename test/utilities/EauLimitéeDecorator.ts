@@ -2,7 +2,7 @@ import {ButtonCodes} from "../../src/hardware/hardware.interface";
 import {HardwareFake} from "./HardwareFake";
 
 export class HardwareFakeDecorator extends HardwareFake {
-    private _decorated: HardwareFake;
+    protected _decorated: HardwareFake;
 
     public constructor(decorated: HardwareFake) {
         super();

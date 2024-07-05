@@ -2,6 +2,7 @@ import {MachineACafé} from "../../src/MachineACafé";
 import { MachineACaféHarness } from "./MachineACaféHarness";
 import {HardwareFake} from "./HardwareFake";
 import { EauLimitéeDecorator } from "./EauLimitéeDecorator";
+import { WaterManagementsSpyDecorator } from "./WaterManagementsSpyDecorator";
 
 export class MachineACaféBuilder {
     
@@ -15,8 +16,9 @@ export class MachineACaféBuilder {
     public Build() : MachineACaféHarness {
         let hardware: HardwareFake = new HardwareFake();
         if(this._penurieDEau) hardware = new EauLimitéeDecorator(hardware, this.limite);
+        let waterManagementsSpyDecorator = new WaterManagementsSpyDecorator(hardware);
 
-        return new MachineACaféHarness(hardware)
+        return new MachineACaféHarness(waterManagementsSpyDecorator, waterManagementsSpyDecorator)
     }
 
     public PenurieDEau(): this{

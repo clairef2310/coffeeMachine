@@ -25,3 +25,25 @@ describe('ÉTANT DONNÉ acheter un café n\'ayant pas d\'eau', () => {
             expect(cafe.argentEncaisséEnCentimes).toEqual(0);
         });
     });
+
+    describe('ÉTANT DONNÉ acheter 2 cafés l\'autre pas servi', () => {
+    
+        test.each([
+            [Pièce.CinquanteCentimes, Eau.Vide] // Cas nominal avec suffisamment d'eau
+        ])
+        ('Cas eau limité (eau: %s)', (pièce:Pièce, eau:Eau) => {
+            
+            // ÉTANT DONNÉ une machine à café avec un réservoir vide
+            let cafe = new MachineACaféBuilder().Build();
+    
+            // QUAND on insere 50cts
+            cafe.SimulerInsertionPièce(Pièce.CinquanteCentimes)
+            cafe.SimulerInsertionPièce(Pièce.CinquanteCentimes)
+    
+            // ALORS il n'a été demandé au hardware de servir un café
+            expect(cafe).aucunCaféNEstServi();
+    
+            // ET l'argent est remboursé
+            expect(cafe.argentEncaisséEnCentimes).toEqual(0);
+        });
+    });
