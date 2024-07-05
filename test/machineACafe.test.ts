@@ -84,8 +84,7 @@ describe("MVP", () => {
     test("Cas plus d'eau", (pièce: Pièce) => {
         // ETANT DONNE une machine a café qui n'a pas assez d'eau
         let hardware = new HardwareFake()
-        let machineACafé = new MachineACafé(hardware)
-
+        let machineACafé = new MachineACafé.SansEau()
         // QUAND on insère la pièce
         hardware.SimulerInsertionPièce(pièce)
 
