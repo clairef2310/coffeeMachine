@@ -1,6 +1,10 @@
 import {Pièce} from "./Pièce";
 import {HardwareInterface} from "./hardware/hardware.interface";
 
+export interface MachineACaféInterface{
+    
+}
+
 export class MachineACafé {
     private readonly _hardware: HardwareInterface;
 
