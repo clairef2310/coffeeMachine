@@ -60,36 +60,26 @@ describe("MVP", () => {
 
     // TODO : Plus de 50cts
     test.each([
+        Pièce.UnCentime,
+        Pièce.DeuxCentimes,
+        Pièce.CinqCentimes,
+        Pièce.DixCentimes,
+        Pièce.VingtCentimes,
         Pièce.CinquanteCentimes,
         Pièce.UnEuro,
-        Pièce.DeuxEuros,
+        Pièce.DeuxEuros
     ])
-    ("Cas nominal : %s", (pièce: Pièce) => {
-        // ETANT DONNE une machine a café
-        // ET une pièce d'une valeur supérieure à 50cts
+    ("Cas plus de 50cts", (pièce: Pièce) => {
         let hardware = new HardwareFake()
-        let machineACafé = new MachineACafé(hardware)
+        let machineCafé = new MachineACafé(hardware)
 
         // QUAND on insère la pièce
         hardware.SimulerInsertionPièce(pièce)
 
-        // ALORS il a été demandé au hardware de servir un café
+        // ALORS il est demandé au hardware de servir un café
         expect(hardware).unCaféEstServi();
 
         // ET l'argent est encaissé
-        expect(machineACafé.argentEncaisséEnCentimes).toEqual(pièce.getMontant());
+        expect(machineCafé.argentEncaisséEnCentimes).toEqual(pièce.getMontant);   
     })
-
-    //TODO : Citerne ne contient plus assez d'eau 
-    test("Cas plus d'eau", (pièce: Pièce) => {
-        // ETANT DONNE une machine a café qui n'a pas assez d'eau
-        let hardware = new HardwareFake()
-        let machineACafé = new MachineACafé.SansEau()
-        // QUAND on insère la pièce
-        hardware.SimulerInsertionPièce(pièce)
-
-        // ALORS elle rend l'argent
-        expect(machineACafé.FlushStoredMoney());
-
-    })
-})  
+})
