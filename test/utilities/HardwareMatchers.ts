@@ -1,4 +1,4 @@
-import {HardwareFake} from "./hardwareFake";
+import {HardwareFake} from "./HardwareFake";
 import {expect} from '@jest/globals';
 import type {MatcherFunction} from 'expect';
 

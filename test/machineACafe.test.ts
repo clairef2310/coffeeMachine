@@ -1,38 +1,38 @@
 import {MachineACafé} from "../src/MachineACafé";
+import { Eau } from "../src/Eau";
 import {Pièce} from "../src/Pièce";
-import {HardwareFake} from "./utilities/hardwareFake";
+import {HardwareFake} from "./utilities/HardwareFake";
 import "./utilities/HardwareMatchers"
+import { MachineACaféBuilder } from "./utilities/MachineACaféBuilder";
 
 describe("MVP", () => {
     test("Cas nominal", () => {
         // ETANT DONNE une machine a café
-        let hardware = new HardwareFake()
-        let machineACafé = new MachineACafé(hardware)
+        let cafe = MachineACaféBuilder.ParDéfaut();
 
         // QUAND on insère 50cts
-        hardware.SimulerInsertionPièce(Pièce.CinquanteCentimes)
+        cafe[1].SimulerInsertionPièce(Pièce.CinquanteCentimes)
 
         // ALORS il a été demandé au hardware de servir un café
-        expect(hardware).unCaféEstServi();
+        expect(cafe[1]).unCaféEstServi();
 
         // ET l'argent est encaissé
-        expect(machineACafé.argentEncaisséEnCentimes).toEqual(50);
+        expect(cafe[0].argentEncaisséEnCentimes).toEqual(50);
     })
 
     test("Cas 2 cafés", () => {
         // ETANT DONNE une machine a café
-        let hardware = new HardwareFake()
-        let machineACafé = new MachineACafé(hardware)
+        let cafe = MachineACaféBuilder.ParDéfaut();
 
         // QUAND on insère 50cts, 2 fois
-        hardware.SimulerInsertionPièce(Pièce.CinquanteCentimes)
-        hardware.SimulerInsertionPièce(Pièce.CinquanteCentimes)
+        cafe[1].SimulerInsertionPièce(Pièce.CinquanteCentimes)
+        cafe[1].SimulerInsertionPièce(Pièce.CinquanteCentimes)
 
         // ALORS il a été demandé au hardware de servir deux cafés
-        expect(hardware).xCafésSontServis(2);
+        expect(cafe[0]).xCafésSontServis(2);
 
         // ET l'argent est encaissé
-        expect(machineACafé.argentEncaisséEnCentimes).toEqual(100);
+        expect(cafe[0].argentEncaisséEnCentimes).toEqual(100);
     })
 
     test.each([
@@ -67,16 +67,37 @@ describe("MVP", () => {
     ("Cas nominal : %s", (pièce: Pièce) => {
         // ETANT DONNE une machine a café
         // ET une pièce d'une valeur supérieure à 50cts
-        let hardware = new HardwareFake()
-        let machineACafé = new MachineACafé(hardware)
+        let cafe = MachineACaféBuilder.ParDéfaut();
 
         // QUAND on insère la pièce
-        hardware.SimulerInsertionPièce(pièce)
+        cafe[1].SimulerInsertionPièce(pièce)
 
         // ALORS il a été demandé au hardware de servir un café
-        expect(hardware).unCaféEstServi();
+        expect(cafe[1]).unCaféEstServi();
 
         // ET l'argent est encaissé
-        expect(machineACafé.argentEncaisséEnCentimes).toEqual(pièce.getMontant());
+        expect(cafe[0].argentEncaisséEnCentimes).toEqual(pièce.getMontant());
     })
+
+    describe('ÉTANT DONNÉ une machine à café avec un réservoir d\'eau limité', () => {
+    
+        test.each([
+            [Pièce.CinquanteCentimes, Eau.Plein] // Cas nominal avec suffisamment d'eau
+        ])
+        ('Cas nominal (eau: %s)', (pièce:Pièce, eau:Eau) => {
+            
+            // ÉTANT DONNÉ une machine à café avec un réservoir d'eau limité
+            let cafe = MachineACaféBuilder.ParDéfaut();
+    
+            // QUAND il y a assez d'eau
+            cafe[1].PourWater();
+    
+            // ALORS il a été demandé au hardware de servir un café
+            expect(cafe[1]).unCaféEstServi();
+    
+            // ET l'argent est encaissé
+            expect(cafe[0].argentEncaisséEnCentimes).toEqual(pièce.getMontant());
+        });
+    });
+    
 })
