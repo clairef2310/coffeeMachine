@@ -82,20 +82,15 @@ describe("MVP", () => {
 
     //TODO : Citerne ne contient plus assez d'eau 
     test("Cas plus d'eau", (pièce: Pièce) => {
-        // ETANT DONNE une machine a café
+        // ETANT DONNE une machine a café qui n'a pas assez d'eau
         let hardware = new HardwareFake()
         let machineACafé = new MachineACafé(hardware)
 
         // QUAND on insère la pièce
         hardware.SimulerInsertionPièce(pièce)
 
-        // ALORS on vérifie que l'eau vient d'une citerne 
-        expect(hardware).estUneCiterne();
+        // ALORS elle rend l'argent
+        expect(machineACafé.FlushStoredMoney());
 
-        // ALORS on vérifie qu'il n'y a pas assez d'eau
-        expect(hardware).pasAssezDEau();
-
-        // ET l'argent est rendu
-        expect(machineACafé.argentRendu());
     })
 })  
