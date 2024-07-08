@@ -26,17 +26,12 @@ export class MachineACafé {
     private insérer(pièce: Pièce) {
         if (pièce.EstInférieureA(MachineACafé.PrixDuCafé)) return;
 
-        this._hardware.MakeACoffee()
-        if(this._hardware.MakeACoffee() == true){
+        if(this._hardware.TryPullWater() == true){
+            this._hardware.MakeACoffee();
             this.argentEncaisséEnCentimes += pièce.getMontant();
+
         }else{
             this._argentRenduEnCentimes = this.argentEncaisséEnCentimes
         }
-    }
-
-    public argentRenduEnCentimes(): number {
-        if(this._hardware.TryPullWater() == false)
-            return this._argentRenduEnCentimes = this.argentEncaisséEnCentimes;
-        return 0;
     }
 }

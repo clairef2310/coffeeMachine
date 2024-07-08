@@ -16,7 +16,6 @@ export class MachineACaféBuilder {
         let hardware: HardwareFakeInterface = new HardwareFake();
         if(this.limite != null){
             hardware = new EauLimitéeDecorator(hardware, this.limite);
-            hardware.TryPullWater();
         }
 
         let waterManagementsSpyDecorator = new WaterManagementsSpyDecorator(hardware);

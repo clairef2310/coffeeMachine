@@ -40,6 +40,6 @@ describe('MVP › Cas 2 cafés pas assez d\'eau', () => {
         expect(machineACafé).unCaféEstServi();
 
         // ET 50 cts a été encaissé
-        expect(machineACafé.argentRenduEnCentimes).toEqual(50);
+        expect(machineACafé._argentRenduEnCentimes).toEqual(50);
     });
 });
