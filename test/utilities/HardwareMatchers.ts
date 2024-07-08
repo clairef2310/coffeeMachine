@@ -1,4 +1,3 @@
-import {HardwareFake} from "./HardwareFake";
 import {expect} from '@jest/globals';
 import type {MatcherFunction} from 'expect';
 import {MachineACaféHarness} from "./MachineACaféHarness";
@@ -10,9 +9,7 @@ const aucunCaféNEstServi: MatcherFunction =
 
         const delta = actual.CountInvocationsMakeACoffee();
         const pass = delta == 0;
-        const message = pass
-            ? `Au moins un café devait être servi, aucun ne l'a été.`
-            : `Aucun café ne devait être servi, ${delta} ont été servis.`;
+        const message = `${delta} cafés servis.`
 
         return {
             message: () => message,
@@ -27,9 +24,7 @@ const unCaféEstServi: MatcherFunction =
 
         const delta = actual.CountInvocationsMakeACoffee();
         const pass = delta == 1;
-        const message = pass
-            ? `Un café devait être servi, ${delta} ne l'a été.`
-            : `Zéro ou plusieurs cafés devaient être servis, Un a été servi.`;
+        const message = `${delta} cafés servis.`
 
         return {
             message: () => message,
@@ -47,9 +42,7 @@ const xCafésSontServis: MatcherFunction<[expected: unknown]> =
 
         const delta = actual.CountInvocationsMakeACoffee();
         const pass = delta == expected;
-        const message = pass
-            ? `${expected} cafés devaient être servis, ${delta} l'a été.`
-            : `Il était demandé de ne pas service ${expected}, ce fut le cas.`;
+        const message = `${delta} cafés servis.`
 
         return {
             message: () => message,

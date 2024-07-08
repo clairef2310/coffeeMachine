@@ -25,4 +25,9 @@ export class MachineACaféBuilder {
         this._penurieDEau = true
         return this
     }
+
+    public AvecNiveauDEau(niveau: number): this {
+        this.limite = niveau;
+        return this;
+    }
 }
