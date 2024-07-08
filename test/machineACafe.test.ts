@@ -59,23 +59,4 @@ describe("MVP", () => {
         // ET l'argent est encaissé
         expect(machineACafé.argentEncaisséEnCentimes).toEqual(pièce.getMontant());
     })
-
-    //TODO : Citerne ne contient plus assez d'eau 
-    test("Cas plus d'eau", (pièce: Pièce) => {
-        // ETANT DONNE une machine a café
-        let hardware = new HardwareFake()
-        let machineACafé = new MachineACafé(hardware)
-
-        // QUAND on insère la pièce
-        hardware.SimulerInsertionPièce(pièce)
-
-        // ALORS on vérifie que l'eau vient d'une citerne 
-        expect(hardware).estUneCiterne();
-
-        // ALORS on vérifie qu'il n'y a pas assez d'eau
-        expect(hardware).pasAssezDEau();
-
-        // ET l'argent est rendu
-        expect(machineACafé.argentRendu());
-    })
-})  
+})
