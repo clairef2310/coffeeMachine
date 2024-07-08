@@ -33,5 +33,6 @@ export class MachineACafé {
         }else{
             this._argentRenduEnCentimes = this.argentEncaisséEnCentimes
         }
+
     }
 }
