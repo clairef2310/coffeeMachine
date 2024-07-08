@@ -1,5 +1,6 @@
 import {Pièce} from "./Pièce";
 import {HardwareInterface} from "./hardware/hardware.interface";
+import {Eau} from "./Eau";
 
 export interface MachineACaféInterface{
     
@@ -17,6 +18,7 @@ export class MachineACafé {
     }
 
     private static readonly PrixDuCafé = Pièce.CinquanteCentimes;
+    private static readonly QuantiteDEau = Eau.Plein;
 
     argentEncaisséEnCentimes: number = 0;
     _argentRenduEnCentimes: number = 0;
@@ -24,14 +26,13 @@ export class MachineACafé {
     private insérer(pièce: Pièce) {
         if (pièce.EstInférieureA(MachineACafé.PrixDuCafé)) return;
 
-        if (this._hardware.TryPullWater() && this._hardware.MakeACoffee()) {
+        if(this._hardware.TryPullWater() == true){
+            this._hardware.MakeACoffee();
             this.argentEncaisséEnCentimes += pièce.getMontant();
-        } else {
-            this._argentRenduEnCentimes += pièce.getMontant();
-        }
-    }
 
-    public get argentRenduEnCentimes(): number {
-        return this._argentRenduEnCentimes;
+        }else{
+            this._argentRenduEnCentimes = this.argentEncaisséEnCentimes
+        }
+
     }
 }

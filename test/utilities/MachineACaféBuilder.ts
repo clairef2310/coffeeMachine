@@ -5,15 +5,19 @@ import {EauLimitéeDecorator} from "./EauLimitéeDecorator";
 
 export class MachineACaféBuilder {
 
-    private limite: number = 1;
+    private limite: number | null = null;
+
 
     public static ParDéfaut() {
-        return new MachineACaféBuilder().Build()
+        return new MachineACaféBuilder().Build();
     }
 
     public Build() : MachineACaféHarness {
         let hardware: HardwareFakeInterface = new HardwareFake();
-        hardware = new EauLimitéeDecorator(hardware, this.limite);
+        if(this.limite != null){
+            hardware = new EauLimitéeDecorator(hardware, this.limite);
+        }
+
         let waterManagementsSpyDecorator = new WaterManagementsSpyDecorator(hardware);
 
         return new MachineACaféHarness(waterManagementsSpyDecorator, waterManagementsSpyDecorator)

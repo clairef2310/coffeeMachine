@@ -23,13 +23,13 @@ export class HardwareFake implements HardwareFakeInterface {
         throw new Error("Method not implemented.");
     }
     TryPullWater(): boolean {
-        throw new Error("Method not implemented.");
+        return true;
     }
     PourMilk(): boolean {
         throw new Error("Method not implemented.");
     }
     PourWater(): boolean {
-        throw new Error("Method not implemented.");
+        return true;
     }
     PourSugar(): boolean {
         throw new Error("Method not implemented.");
