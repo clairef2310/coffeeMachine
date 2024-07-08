@@ -5,11 +5,11 @@ import {MachineACaféBuilder} from "./utilities/MachineACaféBuilder";
 describe("MVP", () => {
     test("Cas 2 cafés", () => {
         // ETANT DONNE une machine a café
-        let machineACafé = MachineACaféBuilder.ParDéfaut()
+        let machineACafé = MachineACaféBuilder.ParDéfaut();
 
         // QUAND on insère 50cts, 2 fois
-        machineACafé.SimulerInsertionPièce(Pièce.CinquanteCentimes)
-        machineACafé.SimulerInsertionPièce(Pièce.CinquanteCentimes)
+        machineACafé.SimulerInsertionPièce(Pièce.CinquanteCentimes);
+        machineACafé.SimulerInsertionPièce(Pièce.CinquanteCentimes);
 
         // ALORS il a été demandé au hardware de servir deux cafés
         expect(machineACafé).xCafésSontServis(2);
