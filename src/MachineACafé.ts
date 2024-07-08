@@ -27,7 +27,11 @@ export class MachineACafé {
         if (pièce.EstInférieureA(MachineACafé.PrixDuCafé)) return;
 
         this._hardware.MakeACoffee()
-        this.argentEncaisséEnCentimes += pièce.getMontant();
+        if(this._hardware.MakeACoffee() == true){
+            this.argentEncaisséEnCentimes += pièce.getMontant();
+        }else{
+            this._argentRenduEnCentimes = this.argentEncaisséEnCentimes
+        }
     }
 
     public argentRenduEnCentimes(): number {
