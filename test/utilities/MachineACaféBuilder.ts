@@ -1,12 +1,10 @@
-import {MachineACafé} from "../../src/MachineACafé";
 import { MachineACaféHarness } from "./MachineACaféHarness";
-import {HardwareFake} from "./HardwareFake";
-import { EauLimitéeDecorator } from "./EauLimitéeDecorator";
+import {HardwareFake, HardwareFakeInterface} from "./HardwareFake";
 import { WaterManagementsSpyDecorator } from "./WaterManagementsSpyDecorator";
+import {EauLimitéeDecorator} from "./EauLimitéeDecorator";
 
 export class MachineACaféBuilder {
-    
-    private _penurieDEau: boolean = false; 
+
     private limite: number = 1;
 
     public static ParDéfaut() {
@@ -14,15 +12,15 @@ export class MachineACaféBuilder {
     }
 
     public Build() : MachineACaféHarness {
-        let hardware: HardwareFake = new HardwareFake();
-        if(this._penurieDEau) hardware = new EauLimitéeDecorator(hardware, this.limite);
+        let hardware: HardwareFakeInterface = new HardwareFake();
+        hardware = new EauLimitéeDecorator(hardware, this.limite);
         let waterManagementsSpyDecorator = new WaterManagementsSpyDecorator(hardware);
 
         return new MachineACaféHarness(waterManagementsSpyDecorator, waterManagementsSpyDecorator)
     }
 
     public PenurieDEau(): this{
-        this._penurieDEau = true
+        this.limite = 0
         return this
     }
 

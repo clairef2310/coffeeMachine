@@ -1,11 +1,11 @@
 import {ButtonCodes} from "../../src/hardware/hardware.interface";
-import {HardwareFake} from "./HardwareFake";
+import {HardwareFake, HardwareFakeInterface} from "./HardwareFake";
+import {Pièce} from "../../src/Pièce";
 
-export class HardwareFakeDecorator extends HardwareFake {
-    protected _decorated: HardwareFake;
+export class HardwareFakeDecorator implements HardwareFakeInterface {
+    protected _decorated: HardwareFakeInterface;
 
-    public constructor(decorated: HardwareFake) {
-        super();
+    public constructor(decorated: HardwareFakeInterface) {
         this._decorated = decorated;
     }
 
@@ -42,24 +42,34 @@ export class HardwareFakeDecorator extends HardwareFake {
     PourSugar(): boolean {
         return this._decorated.PourSugar()
     }
+    SimulerInsertionPièce(pièce: Pièce): void {
+        this._decorated.SimulerInsertionPièce(pièce);
+    }
+    CountInvocationsMakeACoffee(){
+        return this._decorated.CountInvocationsMakeACoffee();
+    }
 }
 
 export class EauLimitéeDecorator extends HardwareFakeDecorator {
     private stock: number;
-    public constructor(decorated: HardwareFake, limite: number) {
+    public constructor(decorated: HardwareFakeInterface, limite: number) {
         super(decorated);
         this.stock = limite
     }
 
     PourWater(): boolean {
-        let auMoinsUneDose = this.stock > 0
-        this.stock --
-        return auMoinsUneDose
+        if (this.stock > 0) {
+            this.stock--;
+            return true;
+        }
+        return false;
     }
 
     TryPullWater(): boolean {
-        let auMoinsUneDose = this.stock > 0
-        this.stock --
-        return auMoinsUneDose
+        if (this.stock > 0) {
+            this.stock--;
+            return true;
+        }
+        return false;
     }
 }

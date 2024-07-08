@@ -30,22 +30,16 @@ describe('ÉTANT DONNÉ acheter un café n\'ayant pas d\'eau', () => {
 describe('MVP › Cas 2 cafés pas assez d\'eau', () => {
     test('Cas 2 cafés pas assez d\'eau', () => {
         // ETANT DONNE une machine a café
-        let hardwareFake = new HardwareFake();
-        let eaulimitee = new EauLimitéeDecorator(hardwareFake, 1);
-        let spyDecorator = new WaterManagementsSpyDecorator(eaulimitee);
         let machineACafé = new MachineACaféBuilder().AvecNiveauDEau(1).Build();
         
-        // QUAND on insère 1 euro
-        spyDecorator.SimulerInsertionPièce(Pièce.UnEuro);
-        spyDecorator.TryPullWater();
-        spyDecorator.MakeACoffee();
-        spyDecorator.TryPullWater();
-        spyDecorator.MakeACoffee();
+        // QUAND on insère deux fois 50cts
+        machineACafé.SimulerInsertionPièce(Pièce.CinquanteCentimes);
+        machineACafé.SimulerInsertionPièce(Pièce.CinquanteCentimes);
 
         // ALORS il n'a été demandé au hardware de servir deux cafés
         expect(machineACafé).unCaféEstServi();
 
         // ET 50 cts a été encaissé
-        expect(machineACafé.argentEncaisséEnCentimes).toEqual(50);
+        expect(machineACafé.argentRenduEnCentimes).toEqual(50);
     });
 });

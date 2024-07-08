@@ -19,11 +19,19 @@ export class MachineACafé {
     private static readonly PrixDuCafé = Pièce.CinquanteCentimes;
 
     argentEncaisséEnCentimes: number = 0;
+    _argentRenduEnCentimes: number = 0;
 
     private insérer(pièce: Pièce) {
-        if(pièce.EstInférieureA(MachineACafé.PrixDuCafé)) return
+        if (pièce.EstInférieureA(MachineACafé.PrixDuCafé)) return;
 
-        this._hardware.MakeACoffee()
-        this.argentEncaisséEnCentimes += pièce.getMontant()
+        if (this._hardware.TryPullWater() && this._hardware.MakeACoffee()) {
+            this.argentEncaisséEnCentimes += pièce.getMontant();
+        } else {
+            this._argentRenduEnCentimes += pièce.getMontant();
+        }
+    }
+
+    public get argentRenduEnCentimes(): number {
+        return this._argentRenduEnCentimes;
     }
 }
