@@ -1,5 +1,7 @@
 export class Eau {
-    private  quantite: number;
+    public quantite: number;
+    static Plein: Eau = new Eau(1000);
+    static Vide: Eau = new Eau(1000);
 
     getQuantite() : number {
         return this.quantite;
@@ -15,6 +17,17 @@ export class Eau {
 
     public toString(){
         return this.quantite.toString() + 'ml';
+    }
+
+    static Parse(quantite: number) {
+        switch (quantite) {
+            case 1000:
+                return Eau.Plein
+            case 0:
+                return Eau.Vide
+            default:
+                throw new Error()
+        }
     }
 
 }

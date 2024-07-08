@@ -1,17 +1,15 @@
-import {HardwareFake} from "./hardwareFake";
 import {expect} from '@jest/globals';
 import type {MatcherFunction} from 'expect';
+import {MachineACaféHarness} from "./MachineACaféHarness";
 
 const aucunCaféNEstServi: MatcherFunction =
     function (actual: unknown) {
-        if(!(actual instanceof HardwareFake))
+        if(!(actual instanceof MachineACaféHarness))
             throw new Error("Only works with MachineACaféHarness");
 
         const delta = actual.CountInvocationsMakeACoffee();
         const pass = delta == 0;
-        const message = pass
-            ? `Au moins un café devait être servi, aucun ne l'a été.`
-            : `Aucun café ne devait être servi, ${delta} ont été servis.`;
+        const message = `${delta} cafés servis.`
 
         return {
             message: () => message,
@@ -21,14 +19,12 @@ const aucunCaféNEstServi: MatcherFunction =
 
 const unCaféEstServi: MatcherFunction =
     function (actual: unknown) {
-        if(!(actual instanceof HardwareFake))
+        if(!(actual instanceof MachineACaféHarness))
             throw new Error("Only works with MachineACaféHarness");
 
         const delta = actual.CountInvocationsMakeACoffee();
         const pass = delta == 1;
-        const message = pass
-            ? `Un café devait être servi, ${delta} ne l'a été.`
-            : `Zéro ou plusieurs cafés devaient être servis, Un a été servi.`;
+        const message = `${delta} cafés servis.`
 
         return {
             message: () => message,
@@ -38,17 +34,15 @@ const unCaféEstServi: MatcherFunction =
 
 const xCafésSontServis: MatcherFunction<[expected: unknown]> =
     function (actual: unknown, expected: unknown) {
-        if(!(actual instanceof HardwareFake))
-            throw new Error("Only works with HardwareFake");
+        if(!(actual instanceof MachineACaféHarness))
+            throw new Error("Only works with MachineACaféHarness");
 
         if(!Number.isInteger(expected))
             throw new Error("Only works with integer");
 
         const delta = actual.CountInvocationsMakeACoffee();
         const pass = delta == expected;
-        const message = pass
-            ? `${expected} cafés devaient être servis, ${delta} l'a été.`
-            : `Il était demandé de ne pas service ${expected}, ce fut le cas.`;
+        const message = `${delta} cafés servis.`
 
         return {
             message: () => message,
