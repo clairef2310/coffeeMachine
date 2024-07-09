@@ -1,6 +1,8 @@
 export class Eau {
+    public static readonly quantitéMax = 5;
+
     public quantite: number;
-    static Plein: Eau = new Eau(1);
+    static Plein: Eau = new Eau(Eau.quantitéMax);
     static Vide: Eau = new Eau(0);
 
     getQuantite() : number {
@@ -21,7 +23,7 @@ export class Eau {
 
     static Parse(quantite: number) {
         switch (quantite) {
-            case 1000:
+            case 5:
                 return Eau.Plein
             case 0:
                 return Eau.Vide

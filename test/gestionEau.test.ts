@@ -23,7 +23,7 @@ describe('ÉTANT DONNÉ acheter un café n\'ayant pas d\'eau', () => {
             expect(cafe).aucunCaféNEstServi();
     
             // ET l'argent est remboursé
-            expect(cafe.argentEncaisséEnCentimes).toEqual(0);
+            expect(cafe.CountInvocationsFlush()).toEqual(1);
         });
     });
 
@@ -40,6 +40,6 @@ describe('MVP › Cas 2 cafés pas assez d\'eau', () => {
         expect(machineACafé).unCaféEstServi();
 
         // ET 50 cts a été encaissé
-        expect(machineACafé._argentRenduEnCentimes).toEqual(50);
+        expect(machineACafé.CountInvocationsCollect()).toEqual(1);
     });
 });

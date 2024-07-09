@@ -1,4 +1,4 @@
-import {ButtonCodes} from "../../src/hardware/hardware.interface";
+import {ButtonCodes, CoinCodes} from "../../src/hardware/hardware.interface";
 import {HardwareFake, HardwareFakeInterface} from "./HardwareFake";
 import {Pièce} from "../../src/Pièce";
 
@@ -7,6 +7,16 @@ export class HardwareFakeDecorator implements HardwareFakeInterface {
 
     public constructor(decorated: HardwareFakeInterface) {
         this._decorated = decorated;
+    }
+
+    DropCashback(coin_code: CoinCodes): boolean {
+        return this._decorated.DropCashback(coin_code);
+    }
+    SetLungoWarningLedState(state: boolean): void {
+        this._decorated.SetLungoWarningLedState(state);
+    }
+    PourChocolate(): boolean {
+        return this._decorated.PourChocolate();
     }
 
     RegisterMoneyInsertedCallback(callback: (coinValue: number) => void): void {
@@ -45,6 +55,9 @@ export class HardwareFakeDecorator implements HardwareFakeInterface {
     SimulerInsertionPièce(pièce: Pièce): void {
         this._decorated.SimulerInsertionPièce(pièce);
     }
+    SimulerAppuieSurButton(buttonCode: ButtonCodes): void {
+        this._decorated.SimulerAppuieSurButton(buttonCode);
+    }
     CountInvocationsMakeACoffee(){
         return this._decorated.CountInvocationsMakeACoffee();
     }
@@ -71,5 +84,9 @@ export class EauLimitéeDecorator extends HardwareFakeDecorator {
             return true;
         }
         return false;
+    }
+
+    RegisterButtonPressedCallback(callback: (buttonCode: ButtonCodes) => void): void {
+        this.stock = 5;
     }
 }
