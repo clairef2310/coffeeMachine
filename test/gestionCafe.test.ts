@@ -1,10 +1,7 @@
 import { Café } from "../src/Café";
 import {Pièce} from "../src/Pièce";
-import { CaféLimitéeDecorator} from "./utilities/CaféLimitéeDecorator";
-import {HardwareFake} from "./utilities/HardwareFake";
 import "./utilities/HardwareMatchers"
 import { MachineACaféBuilder } from "./utilities/MachineACaféBuilder";
-import { WaterManagementsSpyDecorator } from "./utilities/WaterManagementsSpyDecorator";
 
 describe('ÉTANT DONNÉ acheter un café n\'ayant pas de cafe', () => {
     
