@@ -39,12 +39,12 @@ export class MachineACaféBuilder {
         return this;
     }
 
-    public PenurieCafe(): this{
+    public PenurieDeCafé(): this{
         this.limite = 0
         return this
     }
 
-    public AvecNiveauCafe(niveau: number): this {
+    public AvecNiveauDeCafé(niveau: number): this {
         this.limite = niveau;
         return this;
     }

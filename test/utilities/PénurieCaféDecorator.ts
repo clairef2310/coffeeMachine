@@ -51,11 +51,7 @@ export class CaféLimitéeDecorator extends HardwareFakeDecorator {
         this.stock = limite
     }
 
-    PourWater(): boolean {
-        return false
-    }
-
-    TryPullWater(): boolean {
+    MakeACoffee(): boolean {
         return false
     }
 }
