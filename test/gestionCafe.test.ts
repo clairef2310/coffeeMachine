@@ -1,4 +1,4 @@
-import { Cafe } from "../src/Cafe";
+import { Café } from "../src/Café";
 import {Pièce} from "../src/Pièce";
 import { CaféLimitéeDecorator} from "./utilities/CaféLimitéeDecorator";
 import {HardwareFake} from "./utilities/HardwareFake";
@@ -9,12 +9,12 @@ import { WaterManagementsSpyDecorator } from "./utilities/WaterManagementsSpyDec
 describe('ÉTANT DONNÉ acheter un café n\'ayant pas de cafe', () => {
     
         test.each([
-            [Pièce.CinquanteCentimes, Cafe.Vide] // Cas nominal avec suffisamment de cafe
+            [Pièce.CinquanteCentimes, Café.Vide] // Cas nominal avec suffisamment de cafe
         ])
-        ('Cas pas de cafe (pièce: %s, cafe: %s)', (pièce:Pièce, cafe:Cafe) => {
+        ('Cas pas de cafe (pièce: %s, cafe: %s)', (pièce:Pièce, café:Café) => {
             
             // ÉTANT DONNÉ une machine à café avec un réservoir vide
-            let machineACafe = new MachineACaféBuilder().PenurieDeCafe().Build();
+            let machineACafe = new MachineACaféBuilder().PenurieDeCafé().Build();
     
             // QUAND on insere 50cts
             machineACafe.SimulerInsertionPièce(Pièce.CinquanteCentimes);
@@ -30,7 +30,7 @@ describe('ÉTANT DONNÉ acheter un café n\'ayant pas de cafe', () => {
 describe('MVP › Cas 2 cafés pas assez de cafe', () => {
     test('Cas 2 cafés pas assez de cafe', () => {
         // ETANT DONNE une machine a café
-        let machineACafé = new MachineACaféBuilder().AvecNiveauDeCafe(1).Build();
+        let machineACafé = new MachineACaféBuilder().AvecNiveauDeCafé(1).Build();
         
         // QUAND on insère deux fois 50cts
         machineACafé.SimulerInsertionPièce(Pièce.CinquanteCentimes);
