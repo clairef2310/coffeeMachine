@@ -65,9 +65,12 @@ export class HardwareFakeDecorator implements HardwareFakeInterface {
 
 export class EauLimitéeDecorator extends HardwareFakeDecorator {
     private stock: number;
+    private readonly maxStock: number;
+
     public constructor(decorated: HardwareFakeInterface, limite: number) {
         super(decorated);
-        this.stock = limite
+        this.stock = limite;
+        this.maxStock = 5; // Stock maximum d'eau
     }
 
     PourWater(): boolean {
@@ -87,6 +90,13 @@ export class EauLimitéeDecorator extends HardwareFakeDecorator {
     }
 
     RegisterButtonPressedCallback(callback: (buttonCode: ButtonCodes) => void): void {
-        this.stock = 5;
+        const wrappedCallback = (buttonCode: ButtonCodes) => {
+            if (buttonCode === ButtonCodes.BTN_MAINTENANCE_RESET) {
+                this.stock = this.maxStock; // Réinitialiser le stock d'eau au maximum
+            }
+            callback(buttonCode); // Appeler le callback original
+        };
+        this._decorated.RegisterButtonPressedCallback(wrappedCallback);
     }
+
 }

@@ -15,7 +15,7 @@ describe("MVP", () => {
         expect(machineACafé).xCafésSontServis(2);
 
         // ET l'argent est encaissé
-        expect(machineACafé.argentEncaisséEnCentimes).toEqual(100);
+        expect(machineACafé.CountInvocationsCollect()).toEqual(2);
     })
 
     test.each([
@@ -37,7 +37,7 @@ describe("MVP", () => {
         expect(machineACafé).aucunCaféNEstServi();
 
         // ET l'argent n'est pas encaissé
-        expect(machineACafé.argentEncaisséEnCentimes).toEqual(0);
+        expect(machineACafé.CountInvocationsCollect()).toEqual(0);
     })
 
     test.each([
@@ -57,6 +57,6 @@ describe("MVP", () => {
         expect(machineACafé).unCaféEstServi();
 
         // ET l'argent est encaissé
-        expect(machineACafé.argentEncaisséEnCentimes).toEqual(pièce.getMontant());
+        expect(machineACafé.CountInvocationsCollect()).toEqual(1);
     })
 })
