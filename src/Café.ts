@@ -1,6 +1,7 @@
 export class Café {
     public quantite: number;
-    static Plein: Café = new Café(1);
+    public static readonly quantiteMax = 5
+    static Plein: Café = new Café(Café.quantiteMax);
     static Vide: Café = new Café(0);
 
     getQuantite() : number {
@@ -21,7 +22,7 @@ export class Café {
 
     static Parse(quantite: number) {
         switch (quantite) {
-            case 1000:
+            case 5:
                 return Café.Plein
             case 0:
                 return Café.Vide

@@ -8,7 +8,7 @@ describe('ÉTANT DONNÉ acheter un café n\'ayant pas de cafe', () => {
         test.each([
             [Pièce.CinquanteCentimes, Café.Vide] // Cas nominal avec suffisamment de cafe
         ])
-        ('Cas pas de cafe (pièce: %s, cafe: %s)', (pièce:Pièce, café:Café) => {
+        ('Cas pas de cafe', () => {
             
             // ÉTANT DONNÉ une machine à café avec un réservoir vide
             let machineACafe = new MachineACaféBuilder().PenurieDeCafé().Build();
@@ -20,7 +20,7 @@ describe('ÉTANT DONNÉ acheter un café n\'ayant pas de cafe', () => {
             expect(machineACafe).aucunCaféNEstServi();
     
             // ET l'argent est remboursé
-            expect(machineACafe.argentEncaisséEnCentimes).toEqual(0);
+            expect(machineACafe.CountInvocationsFlush()).toEqual(1);
         });
     });
 
@@ -37,6 +37,6 @@ describe('MVP › Cas 2 cafés pas assez de cafe', () => {
         expect(machineACafé).unCaféEstServi();
 
         // ET 50 cts a été encaissé
-        expect(machineACafé._argentRenduEnCentimes).toEqual(50);
+        expect(machineACafé.CountInvocationsCollect()).toEqual(1);
     });
 });
