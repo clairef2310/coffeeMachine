@@ -44,7 +44,7 @@ export class HardwareFakeDecorator extends HardwareFake {
     }
 }
 
-export class PénurieCaféDecorator extends HardwareFakeDecorator {
+export class CaféLimitéeDecorator extends HardwareFakeDecorator {
     private stock: number;
     public constructor(decorated: HardwareFake, limite: number) {
         super(decorated);

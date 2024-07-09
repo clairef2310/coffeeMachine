@@ -1,6 +1,6 @@
 import { Cafe } from "../src/Cafe";
 import {Pièce} from "../src/Pièce";
-import { CafeLimitéeDecorator} from "./utilities/CafeLimitéeDecorator";
+import { CaféLimitéeDecorator} from "./utilities/CaféLimitéeDecorator";
 import {HardwareFake} from "./utilities/HardwareFake";
 import "./utilities/HardwareMatchers"
 import { MachineACaféBuilder } from "./utilities/MachineACaféBuilder";
