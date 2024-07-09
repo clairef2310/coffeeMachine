@@ -1,33 +1,33 @@
-import { Eau } from "../src/Eau";
+import { Café } from "../src/Café";
 import {Pièce} from "../src/Pièce";
 import "./utilities/HardwareMatchers"
 import { MachineACaféBuilder } from "./utilities/MachineACaféBuilder";
 
-describe('ÉTANT DONNÉ acheter un café n\'ayant pas d\'eau', () => {
+describe('ÉTANT DONNÉ acheter un café n\'ayant pas de cafe', () => {
     
         test.each([
-            [Pièce.CinquanteCentimes, Eau.Vide] // Cas nominal avec suffisamment d'eau
+            [Pièce.CinquanteCentimes, Café.Vide] // Cas nominal avec suffisamment de cafe
         ])
-        ('Cas pas d\'eau', () => {
+        ('Cas pas de cafe (pièce: %s, cafe: %s)', (pièce:Pièce, café:Café) => {
             
             // ÉTANT DONNÉ une machine à café avec un réservoir vide
-            let cafe = new MachineACaféBuilder().PenurieDEau().Build();
+            let machineACafe = new MachineACaféBuilder().PenurieDeCafé().Build();
     
             // QUAND on insere 50cts
-            cafe.SimulerInsertionPièce(Pièce.CinquanteCentimes);
+            machineACafe.SimulerInsertionPièce(Pièce.CinquanteCentimes);
     
             // ALORS il n'a été demandé au hardware de servir un café
-            expect(cafe).aucunCaféNEstServi();
+            expect(machineACafe).aucunCaféNEstServi();
     
             // ET l'argent est remboursé
-            expect(cafe.CountInvocationsFlush()).toEqual(1);
+            expect(machineACafe.argentEncaisséEnCentimes).toEqual(0);
         });
     });
 
-describe('MVP › Cas 2 cafés pas assez d\'eau', () => {
-    test('Cas 2 cafés pas assez d\'eau', () => {
+describe('MVP › Cas 2 cafés pas assez de cafe', () => {
+    test('Cas 2 cafés pas assez de cafe', () => {
         // ETANT DONNE une machine a café
-        let machineACafé = new MachineACaféBuilder().AvecNiveauDEau(1).Build();
+        let machineACafé = new MachineACaféBuilder().AvecNiveauDeCafé(1).Build();
         
         // QUAND on insère deux fois 50cts
         machineACafé.SimulerInsertionPièce(Pièce.CinquanteCentimes);
@@ -37,6 +37,6 @@ describe('MVP › Cas 2 cafés pas assez d\'eau', () => {
         expect(machineACafé).unCaféEstServi();
 
         // ET 50 cts a été encaissé
-        expect(machineACafé.CountInvocationsCollect()).toEqual(1);
+        expect(machineACafé._argentRenduEnCentimes).toEqual(50);
     });
 });
