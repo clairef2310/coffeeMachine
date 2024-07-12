@@ -5,10 +5,7 @@ import { MachineACaféBuilder } from "./utilities/MachineACaféBuilder";
 
 describe('ÉTANT DONNÉ acheter un café n\'ayant pas d\'eau', () => {
     
-        test.each([
-            [Pièce.CinquanteCentimes, Eau.Vide] // Cas nominal avec suffisamment d'eau
-        ])
-        ('Cas pas d\'eau', () => {
+        test('Cas pas d\'eau', () => {
             
             // ÉTANT DONNÉ une machine à café avec un réservoir vide
             let cafe = new MachineACaféBuilder().PenurieDEau().Build();

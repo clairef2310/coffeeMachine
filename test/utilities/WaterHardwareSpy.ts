@@ -1,7 +1,7 @@
 import { HardwareFakeDecorator } from "./EauLimitéeDecorator";
 import {HardwareFake, HardwareFakeInterface} from "./HardwareFake";
 
-export class WaterManagementsSpyDecorator extends HardwareFakeDecorator {
+export class WaterHardwareSpy extends HardwareFakeDecorator {
 
     private _nbInvocationsTryPullWater: number = 0;
     private _nbInvocationsPourWater:number = 0;

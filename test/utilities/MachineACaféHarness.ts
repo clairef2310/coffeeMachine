@@ -1,14 +1,14 @@
 import {MachineACafé} from "../../src/MachineACafé";
 import {Pièce} from "../../src/Pièce";
 import {HardwareFake, HardwareFakeInterface} from "./HardwareFake";
-import { WaterManagementsSpyDecorator } from "./WaterManagementsSpyDecorator";
+import { WaterHardwareSpy } from "./WaterHardwareSpy";
 import {ButtonCodes} from "../../src/hardware/hardware.interface";
 
 export class MachineACaféHarness extends MachineACafé {
     private hardware: HardwareFakeInterface;
-    private spy: WaterManagementsSpyDecorator;
+    private spy: WaterHardwareSpy;
 
-    public constructor(hardware: HardwareFakeInterface, surveillanceDosesEau: WaterManagementsSpyDecorator) {
+    public constructor(hardware: HardwareFakeInterface, surveillanceDosesEau: WaterHardwareSpy) {
         super(hardware);
         this.hardware = hardware;
         this.spy = surveillanceDosesEau;

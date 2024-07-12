@@ -1,6 +1,6 @@
 import { MachineACaféHarness } from "./MachineACaféHarness";
 import {HardwareFake, HardwareFakeInterface} from "./HardwareFake";
-import { WaterManagementsSpyDecorator } from "./WaterManagementsSpyDecorator";
+import { WaterHardwareSpy } from "./WaterHardwareSpy";
 import {EauLimitéeDecorator} from "./EauLimitéeDecorator";
 import { CaféLimitéeDecorator } from "./CaféLimitéeDecorator";
 
@@ -24,7 +24,7 @@ export class MachineACaféBuilder {
             
         }
 
-        let waterManagementsSpyDecorator = new WaterManagementsSpyDecorator(hardware);
+        let waterManagementsSpyDecorator = new WaterHardwareSpy(hardware);
 
         return new MachineACaféHarness(waterManagementsSpyDecorator, waterManagementsSpyDecorator)
     }
